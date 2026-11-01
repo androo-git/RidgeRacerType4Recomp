@@ -3,10 +3,12 @@
 The `psxrecomp` and `recomp-ui` submodule gitlinks are the pins. Bump them
 deliberately and record each bump here with the reason and what was verified.
 
-2026-11-01 NeGcon host presentation (PROVISIONAL: pins local topic branches —
-push `feat/negcon-host-device` to `tetrisgm/psxrecomp` and
-`tetrisgm/recomp-launcher`, merge to `r4/main`, and re-pin to the merged
-commits before landing): psxrecomp `1ccbc0e`, recomp-ui `2d51d56`. A physical
+2026-11-01 NeGcon host presentation (PROVISIONAL: pins test branches on our
+own forks — psxrecomp `1ccbc0e` on `androo-git/psxrecomp`,
+recomp-ui `2d51d56` on `androo-git/recomp-launcher`, both `feat/negcon-host-device`;
+this branch's .gitmodules points at those forks so the pins fetch, which is
+test-only — revert .gitmodules and re-pin to the merged `r4/main` commits when
+the work lands): psxrecomp `1ccbc0e`, recomp-ui `2d51d56`. A physical
 NeGcon now reaches R4 as its native NeGcon device (ID 0x23): a device whose
 name contains "negcon" is auto-detected (`psx_controller_name_is_negcon`), and
 the launcher's NeGcon controller profile selects the new "negcon" pad mode

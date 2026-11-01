@@ -1,8 +1,8 @@
 [submodule "recomp-ui"]
 	path = recomp-ui
-	url = https://github.com/RetroPortingToolKit/recomp-launcher.git
+	url = https://github.com/androo-git/recomp-launcher.git
 	branch = main
 [submodule "psxrecomp"]
 	path = psxrecomp
-	url = https://github.com/tetrisgm/psxrecomp.git
+	url = https://github.com/androo-git/psxrecomp.git
 	branch = master
