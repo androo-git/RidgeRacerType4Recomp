@@ -231,8 +231,11 @@ computer from **your own disc**.
 - Recognized SDL steering wheels now use an emulated JogCon SIO identity and
   signed steering position. Ordinary gamepads default to R4's native DualShock
   analog protocol. The JogCon motor command is exposed in emulated device state;
-  wheel force feedback is not translated or hardware-verified. NeGcon emulation
-  remains unavailable in the framework.
+  wheel force feedback is not translated or hardware-verified. A physical NeGcon
+  (a USB adapter whose name contains "negcon", or the NeGcon controller profile
+  in the launcher for generic-named adapters) is presented to R4 as its native
+  NeGcon: twist steering on the left stick, analog I / II on the right / left
+  trigger, L on L1. R4's own NeGcon config screens then apply.
 - The first visit to some menus (garage, car select, records) runs slower while
   their code is compiled in the background; later visits are native.
 - Updating: extract a new version to a **new folder** (extracting over an old

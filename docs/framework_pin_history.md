@@ -3,6 +3,25 @@
 The `psxrecomp` and `recomp-ui` submodule gitlinks are the pins. Bump them
 deliberately and record each bump here with the reason and what was verified.
 
+2026-11-01 NeGcon host presentation (PROVISIONAL: pins local topic branches —
+push `feat/negcon-host-device` to `tetrisgm/psxrecomp` and
+`tetrisgm/recomp-launcher`, merge to `r4/main`, and re-pin to the merged
+commits before landing): psxrecomp `1ccbc0e`, recomp-ui `2d51d56`. A physical
+NeGcon now reaches R4 as its native NeGcon device (ID 0x23): a device whose
+name contains "negcon" is auto-detected (`psx_controller_name_is_negcon`), and
+the launcher's NeGcon controller profile selects the new "negcon" pad mode
+(`PAD_MODE_NEGCON = 3`) for generic-named adapters. Twist is left stick X,
+analog I/II the right/left trigger, L on L1; R4's own NeGcon screens and
+config then apply. Modern controls pass a presented NeGcon through untouched.
+Debug injection drives one (`set_input pad_type 3`,
+`PSX_DEBUG_INITIAL_PAD_TYPE=3`). Verified here (Windows, MSVC syntax parity
+with master on all touched units; `test_sio_negcon_protocol` 2- and 5-player,
+`psx_pad_apply`, `mod_pad_transform`, `pad_external_input`,
+`psx_trigger_values`, `controller_type`, `launcher_pad_mode_resolve` and the
+new `negcon_host_wiring` source guard all pass). Not yet verified: full build
+on the sanctioned toolchains (MinGW/macOS), headless smoke, and the owner's
+physical NeGcon on a USB adapter. See ISSUES.md #3.
+
 2026-10-30 final release integration: pin fork `r4/main` at `fc175dce`
 (`fc175dce` merges release blocking waits and startup measurement support).
 This carries the frame architecture's native authority and immutable presentation

@@ -23,12 +23,26 @@ R4 registers the libcomb "sio" device at every boot and its link-battle overlay
 (`runtime/src/memory.c` only charges timing), so link battle ends in
 "LINK ERROR!". Netplay VS Battle (split screen) is the supported 2-player path.
 
-## #3 — NeGcon / JogCon not modeled — OPEN (framework)
+## #3 — NeGcon / JogCon not modeled — PARTIAL (framework)
 
 The game identifies digital (0x41), DualShock (0x73), mouse (0x12), NeGcon
-(0x23) and JogCon (0xE3) pads. The framework presents digital or DualShock
-only, and netplay carries buttons + 4 axes. Analog steering therefore comes
-from DualShock mode, not NeGcon twist.
+(0x23) and JogCon (0xE3) pads. The SIO layer models the NeGcon fully since the
+2026-10-08 pin (ID 0x23, twist + analog I/II/L; `test_sio_negcon_protocol.c`),
+and R4's Modern scheme presents one while driving. What was still missing was
+host presentation for physical hardware: every host pad was forced to
+DualShock/digital (wheels excepted), so a real NeGcon on a USB adapter never
+reached the game as one.
+
+Fixed on psxrecomp topic `feat/negcon-host-device` (pending pin): a device
+whose name contains "negcon" (or the new "negcon" pad mode, which the
+launcher's NeGcon controller profile now selects) presents the NeGcon SIO
+device — twist on left stick X, analog I/II on the right/left trigger, L on
+L1 — so R4's own NeGcon screens, twist steering and config engage. Debug
+injection can drive one too (`set_input pad_type 3`,
+`PSX_DEBUG_INITIAL_PAD_TYPE=3`). Netplay already carries the type and
+pressures. Not yet hardware-verified; adapters that report I/II on other axes
+than the triggers will need a mapping table. JogCon is unchanged (wheel name
+detection).
 
 ## #4 — First visit to an overlay mode runs interpreted — OPEN (enhancement)
 
